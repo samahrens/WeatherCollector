@@ -1,0 +1,19 @@
+import requests
+
+API_KEY = "57efc2f9da936bdc2a21a0b9968dc9b2"
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+city = input("Please enter a city: ")
+
+request_url = f"{BASE_URL}?appid={API_KEY}&q={city}&units=imperial"
+response = requests.get(request_url)
+
+if response.status_code == 200:
+    data = response.json()
+    weather = data["weather"][0]["description"]
+    print(f"The current weather is {weather}")
+    temperature = data["main"]["temp"]
+    print(f"It is {temperature} degrees fahrenheit")
+    humidity = data["main"]["humidity"]
+    print(f"The humidity is at {humidity}%")
+else:
+    print("Please enter a valid city!")
